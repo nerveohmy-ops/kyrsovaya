@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net472</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <RootNamespace>kyrsovaya</RootNamespace>
+    <AssemblyName>kyrsovaya</AssemblyName>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Configuration" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- SQL-скрипт зашит в exe, чтобы приложение само создало БД при первом запуске -->
+    <EmbeddedResource Include="Database\CreateDatabase.sql" />
+    <!-- Картинки копируются рядом с exe -->
+    <None Include="Images\**" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

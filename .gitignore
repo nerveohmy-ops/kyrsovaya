@@ -1,0 +1,9 @@
+.vs/
+**/bin/
+**/obj/
+**/Outbox/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.cache
