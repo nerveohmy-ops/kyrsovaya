@@ -57,7 +57,9 @@ namespace kyrsovaya.Forms
             labelSpeciesCount.Text = "Видов в базе: " + _species.CountAll();
             labelThreatened.Text = "Под угрозой: " + _species.CountThreatened();
             labelObservations.Text = "Наблюдений: " + _observations.CountAll();
-            labelExcursions.Text = "Открытых экскурсий: " + _excursions.CountOpen();
+            labelExcursions.Text = _user.IsGuide
+                ? "Назначено вам экскурсий: " + _excursions.CountForGuide(_user.Id)
+                : "Открытых экскурсий: " + _excursions.CountOpen();
         }
 
         private void LoadBackground()

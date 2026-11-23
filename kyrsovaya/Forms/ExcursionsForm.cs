@@ -29,9 +29,9 @@ namespace kyrsovaya.Forms
 
         private void SetupPermissions()
         {
-            // Присоединиться к экскурсии может любой авторизованный пользователь
-            btnBook.Visible = true;
-            btnCancelBooking.Visible = true;
+            // Присоединиться к экскурсии могут все, кроме гида (гида назначает научный сотрудник)
+            btnBook.Visible = !_isGuide;
+            btnCancelBooking.Visible = !_isGuide;
 
             // Кнопки управления для научного сотрудника / администратора
             btnAdd.Visible = _canManage;
@@ -42,11 +42,12 @@ namespace kyrsovaya.Forms
             btnDelete.Visible = _canManage;
             btnExport.Visible = _canManage;
 
-            // Гид тоже может смотреть список участников своих экскурсий
+            // Гид смотрит назначенные ему экскурсии и список участников
             btnParticipants.Visible = _canManage || _isGuide;
-            if (_isGuide && !_canManage)
+            if (_isGuide)
             {
-                btnParticipants.Location = new Point(345, 12);
+                Text = "Мои экскурсии (назначенные гиду)";
+                btnParticipants.Location = new Point(15, 12);
             }
 
             panelBottom.Height = _canManage ? 104 : 60;
@@ -57,7 +58,10 @@ namespace kyrsovaya.Forms
             cmbFilter.Items.Add("Все");
             cmbFilter.Items.Add("Открытые");
             cmbFilter.Items.Add("Закрытые");
-            cmbFilter.Items.Add("Мои записи");
+            if (!_isGuide)
+            {
+                cmbFilter.Items.Add("Мои записи");
+            }
             cmbFilter.SelectedIndex = 0;
             _filtersReady = true;
         }
@@ -65,7 +69,7 @@ namespace kyrsovaya.Forms
         private void LoadData()
         {
             int filterMode = cmbFilter.SelectedIndex < 0 ? 0 : cmbFilter.SelectedIndex;
-            grid.DataSource = _repo.GetAll(txtSearch.Text.Trim(), filterMode, Session.CurrentUser.Id);
+            grid.DataSource = _repo.GetAll(txtSearch.Text.Trim(), filterMode, Session.CurrentUser.Id, _isGuide);
             SetupColumns();
             labelCount.Text = "Найдено: " + grid.Rows.Count;
         }
@@ -91,6 +95,7 @@ namespace kyrsovaya.Forms
             grid.Columns["StatusText"].FillWeight = 65;
 
             grid.Columns["MyBooking"].HeaderText = "Моя запись";
+            grid.Columns["MyBooking"].Visible = !_isGuide;
             grid.Columns["MyBooking"].FillWeight = 80;
 
             grid.Columns["Description"].HeaderText = "Описание";

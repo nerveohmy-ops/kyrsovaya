@@ -12,8 +12,9 @@ namespace kyrsovaya.Data
         /// <summary>
         /// Список экскурсий с поиском и фильтром.
         /// filterMode: 0 — все, 1 — открытые, 2 — закрытые, 3 — мои записи.
+        /// Если onlyGuide == true, возвращаются только экскурсии, где гидом назначен currentUserId.
         /// </summary>
-        public DataTable GetAll(string search, int filterMode, int currentUserId)
+        public DataTable GetAll(string search, int filterMode, int currentUserId, bool onlyGuide = false)
         {
             return Db.Query(
                 "SELECT e.Id, e.Title, z.Name AS ZoneName, e.ExcursionDate, " +
@@ -30,6 +31,7 @@ namespace kyrsovaya.Data
                 "JOIN Zones z ON z.Id = e.ZoneId " +
                 "JOIN Users g ON g.Id = e.GuideId " +
                 "WHERE (@search = N'' OR e.Title LIKE N'%' + @search + N'%' OR z.Name LIKE N'%' + @search + N'%') " +
+                "AND (@onlyGuide = 0 OR e.GuideId = @userId) " +
                 "AND (@mode = 0 " +
                 "     OR (@mode = 1 AND e.IsOpen = 1) " +
                 "     OR (@mode = 2 AND e.IsOpen = 0) " +
@@ -37,7 +39,8 @@ namespace kyrsovaya.Data
                 "ORDER BY e.IsOpen DESC, e.ExcursionDate ASC",
                 Db.Param("@search", search),
                 Db.Param("@mode", filterMode),
-                Db.Param("@userId", currentUserId));
+                Db.Param("@userId", currentUserId),
+                Db.Param("@onlyGuide", onlyGuide ? 1 : 0));
         }
 
         public DataRow GetById(int id)
@@ -180,6 +183,11 @@ namespace kyrsovaya.Data
         public int CountOpen()
         {
             return (int)Db.Scalar("SELECT COUNT(*) FROM Excursions WHERE IsOpen = 1");
+        }
+
+        public int CountForGuide(int guideId)
+        {
+            return (int)Db.Scalar("SELECT COUNT(*) FROM Excursions WHERE GuideId = @id", Db.Param("@id", guideId));
         }
     }
 }
