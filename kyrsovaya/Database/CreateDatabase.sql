@@ -4,10 +4,10 @@
   или автоматически самим приложением при первом старте.
 
   Тестовые учётные записи:
-    admin   / admin2026   (администратор)
-    ivanov  / park2026    (научный сотрудник)
-    guide1  / guide2026   (гид)
-    visitor1/ park2026    (посетитель)
+    admin   / admin!2026park   (администратор)
+    ivanov  / park!2026demo    (научный сотрудник)
+    guide1  / guide!2026park   (гид)
+    visitor1/ park!2026demo    (посетитель)
 */
 
 IF DB_ID(N'NationalParkDB') IS NULL
@@ -98,25 +98,25 @@ INSERT INTO ConservationStatuses (Id, Code, Name) VALUES
 (6, N'LC', N'Вызывает наименьшие опасения'),
 (7, N'DD', N'Недостаточно данных');
 
--- Пароли: admin -> admin2026, сотрудники и посетители -> park2026, гиды -> guide2026
+-- Пароли: admin -> admin!2026park, сотрудники и посетители -> park!2026demo, гиды -> guide!2026park
 INSERT INTO Users (Login, PasswordHash, LastName, FirstName, Email, Phone, RoleId) VALUES
-(N'admin',      CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'admin2026'), 2), N'Шишлов',    N'Антон',     N'admin@grinpich.ru',     '9001112233', 1),
-(N'ivanov',     CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'park2026'), 2),  N'Иванов',    N'Сергей',    N'ivanov@grinpich.ru',    '9001112234', 2),
-(N'petrova',    CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'park2026'), 2),  N'Петрова',   N'Анна',      N'petrova@grinpich.ru',   '9001112235', 2),
-(N'sidorov',    CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'park2026'), 2),  N'Сидоров',   N'Михаил',    N'sidorov@grinpich.ru',   '9001112236', 2),
-(N'kuznetsova', CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'park2026'), 2),  N'Кузнецова', N'Елена',     N'kuznetsova@grinpich.ru','9001112237', 2),
-(N'visitor1',   CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'park2026'), 2),  N'Смирнов',   N'Дмитрий',   N'smirnov@mail.ru',       '9002223341', 3),
-(N'visitor2',   CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'park2026'), 2),  N'Попова',    N'Мария',     N'popova@mail.ru',        '9002223342', 3),
-(N'visitor3',   CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'park2026'), 2),  N'Соколов',   N'Андрей',    N'sokolov@mail.ru',       '9002223343', 3),
-(N'visitor4',   CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'park2026'), 2),  N'Лебедева',  N'Ольга',     N'lebedeva@mail.ru',      '9002223344', 3),
-(N'visitor5',   CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'park2026'), 2),  N'Козлов',    N'Игорь',     N'kozlov@mail.ru',        '9002223345', 3),
-(N'visitor6',   CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'park2026'), 2),  N'Новикова',  N'Татьяна',   N'novikova@mail.ru',      '9002223346', 3),
-(N'visitor7',   CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'park2026'), 2),  N'Морозов',   N'Павел',     N'morozov@mail.ru',       '9002223347', 3),
-(N'visitor8',   CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'park2026'), 2),  N'Волкова',   N'Наталья',   N'volkova@mail.ru',       '9002223348', 3),
-(N'visitor9',   CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'park2026'), 2),  N'Зайцев',    N'Алексей',   N'zaytsev@mail.ru',       '9002223349', 3),
-(N'visitor10',  CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'park2026'), 2),  N'Орлова',    N'Светлана',  N'orlova@mail.ru',        '9002223350', 3),
-(N'guide1',     CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'guide2026'), 2), N'Ковалёв',   N'Артём',     N'kovalev@grinpich.ru',   '9003334451', 4),
-(N'guide2',     CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'guide2026'), 2), N'Белова',    N'Дарья',     N'belova@grinpich.ru',    '9003334452', 4);
+(N'admin',      CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'admin!2026park'), 2), N'Шишлов',    N'Антон',     N'admin@grinpich.ru',     '9001112233', 1),
+(N'ivanov',     CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'park!2026demo'), 2),  N'Иванов',    N'Сергей',    N'ivanov@grinpich.ru',    '9001112234', 2),
+(N'petrova',    CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'park!2026demo'), 2),  N'Петрова',   N'Анна',      N'petrova@grinpich.ru',   '9001112235', 2),
+(N'sidorov',    CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'park!2026demo'), 2),  N'Сидоров',   N'Михаил',    N'sidorov@grinpich.ru',   '9001112236', 2),
+(N'kuznetsova', CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'park!2026demo'), 2),  N'Кузнецова', N'Елена',     N'kuznetsova@grinpich.ru','9001112237', 2),
+(N'visitor1',   CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'park!2026demo'), 2),  N'Смирнов',   N'Дмитрий',   N'smirnov@mail.ru',       '9002223341', 3),
+(N'visitor2',   CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'park!2026demo'), 2),  N'Попова',    N'Мария',     N'popova@mail.ru',        '9002223342', 3),
+(N'visitor3',   CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'park!2026demo'), 2),  N'Соколов',   N'Андрей',    N'sokolov@mail.ru',       '9002223343', 3),
+(N'visitor4',   CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'park!2026demo'), 2),  N'Лебедева',  N'Ольга',     N'lebedeva@mail.ru',      '9002223344', 3),
+(N'visitor5',   CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'park!2026demo'), 2),  N'Козлов',    N'Игорь',     N'kozlov@mail.ru',        '9002223345', 3),
+(N'visitor6',   CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'park!2026demo'), 2),  N'Новикова',  N'Татьяна',   N'novikova@mail.ru',      '9002223346', 3),
+(N'visitor7',   CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'park!2026demo'), 2),  N'Морозов',   N'Павел',     N'morozov@mail.ru',       '9002223347', 3),
+(N'visitor8',   CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'park!2026demo'), 2),  N'Волкова',   N'Наталья',   N'volkova@mail.ru',       '9002223348', 3),
+(N'visitor9',   CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'park!2026demo'), 2),  N'Зайцев',    N'Алексей',   N'zaytsev@mail.ru',       '9002223349', 3),
+(N'visitor10',  CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'park!2026demo'), 2),  N'Орлова',    N'Светлана',  N'orlova@mail.ru',        '9002223350', 3),
+(N'guide1',     CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'guide!2026park'), 2), N'Ковалёв',   N'Артём',     N'kovalev@grinpich.ru',   '9003334451', 4),
+(N'guide2',     CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'guide!2026park'), 2), N'Белова',    N'Дарья',     N'belova@grinpich.ru',    '9003334452', 4);
 
 INSERT INTO Zones (Name, AreaHa, Description) VALUES
 (N'Северный кордон',        1250.0, N'Охраняемая граница парка, горные склоны'),

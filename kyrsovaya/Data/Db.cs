@@ -55,14 +55,16 @@ namespace kyrsovaya.Data
                     "    INSERT INTO Roles (Id, Name) VALUES (4, N'Гид');\n" +
                     "IF NOT EXISTS (SELECT 1 FROM Users WHERE Login = N'guide1') " +
                     "    INSERT INTO Users (Login, PasswordHash, LastName, FirstName, Email, Phone, RoleId) " +
-                    "    VALUES (N'guide1', CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'guide2026'), 2), N'Ковалёв', N'Артём', N'kovalev@grinpich.ru', '9003334451', 4);\n" +
+                    "    VALUES (N'guide1', CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'guide!2026park'), 2), N'Ковалёв', N'Артём', N'kovalev@grinpich.ru', '9003334451', 4);\n" +
                     "IF NOT EXISTS (SELECT 1 FROM Users WHERE Login = N'guide2') " +
                     "    INSERT INTO Users (Login, PasswordHash, LastName, FirstName, Email, Phone, RoleId) " +
-                    "    VALUES (N'guide2', CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'guide2026'), 2), N'Белова', N'Дарья', N'belova@grinpich.ru', '9003334452', 4);\n" +
-                    "UPDATE Users SET PasswordHash = CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'admin2026'), 2) " +
-                    "    WHERE PasswordHash = CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'Admin2024!Park'), 2);\n" +
-                    "UPDATE Users SET PasswordHash = CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'park2026'), 2) " +
-                    "    WHERE PasswordHash = CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'Park2024!Demo'), 2);");
+                    "    VALUES (N'guide2', CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'guide!2026park'), 2), N'Белова', N'Дарья', N'belova@grinpich.ru', '9003334452', 4);\n" +
+                    "UPDATE Users SET PasswordHash = CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'admin!2026park'), 2) " +
+                    "    WHERE PasswordHash IN (CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'Admin2024!Park'), 2), CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'admin2026'), 2));\n" +
+                    "UPDATE Users SET PasswordHash = CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'park!2026demo'), 2) " +
+                    "    WHERE PasswordHash IN (CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'Park2024!Demo'), 2), CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'park2026'), 2));\n" +
+                    "UPDATE Users SET PasswordHash = CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'guide!2026park'), 2) " +
+                    "    WHERE PasswordHash = CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'guide2026'), 2);");
 
                 var checkTable = new SqlCommand("SELECT OBJECT_ID(N'dbo.Excursions', N'U')", conn);
                 if (checkTable.ExecuteScalar() == DBNull.Value)

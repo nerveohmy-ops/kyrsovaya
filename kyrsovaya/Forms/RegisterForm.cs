@@ -33,7 +33,7 @@ namespace kyrsovaya.Forms
             toolTip.SetToolTip(txtLogin, "4–30 символов: латинские буквы, цифры, _ и точка");
             toolTip.SetToolTip(txtEmail, "Например: name@mail.ru");
             toolTip.SetToolTip(mtbPhone, "Формат: +7 (900) 123-45-67");
-            toolTip.SetToolTip(txtPassword, "Не короче 6 символов, с буквами и цифрами");
+            toolTip.SetToolTip(txtPassword, "Не короче 12 символов, с буквами, цифрами и спецсимволами");
             toolTip.SetToolTip(txtRepeat, "Повторите пароль ещё раз");
         }
 
