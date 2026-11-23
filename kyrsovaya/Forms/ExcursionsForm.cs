@@ -15,6 +15,7 @@ namespace kyrsovaya.Forms
     {
         private readonly ExcursionRepository _repo = new ExcursionRepository();
         private readonly bool _canManage = Session.CurrentUser.CanEditData;
+        private readonly bool _isGuide = Session.CurrentUser.IsGuide;
         private bool _filtersReady;
 
         public ExcursionsForm()
@@ -37,9 +38,16 @@ namespace kyrsovaya.Forms
             btnEdit.Visible = _canManage;
             btnOpen.Visible = _canManage;
             btnClose.Visible = _canManage;
-            btnParticipants.Visible = _canManage;
+            btnAssignGuide.Visible = _canManage;
             btnDelete.Visible = _canManage;
             btnExport.Visible = _canManage;
+
+            // Гид тоже может смотреть список участников своих экскурсий
+            btnParticipants.Visible = _canManage || _isGuide;
+            if (_isGuide && !_canManage)
+            {
+                btnParticipants.Location = new Point(345, 12);
+            }
 
             panelBottom.Height = _canManage ? 104 : 60;
         }
@@ -65,6 +73,7 @@ namespace kyrsovaya.Forms
         private void SetupColumns()
         {
             grid.Columns["Id"].Visible = false;
+            grid.Columns["GuideId"].Visible = false;
             grid.Columns["IsOpen"].Visible = false;
             grid.Columns["IsBooked"].Visible = false;
 
@@ -73,7 +82,7 @@ namespace kyrsovaya.Forms
             grid.Columns["ZoneName"].HeaderText = "Участок";
             grid.Columns["ExcursionDate"].HeaderText = "Дата и время";
             grid.Columns["ExcursionDate"].DefaultCellStyle.Format = "dd.MM.yyyy HH:mm";
-            grid.Columns["GuideName"].HeaderText = "Экскурсовод";
+            grid.Columns["GuideName"].HeaderText = "Гид";
             grid.Columns["BookedCount"].HeaderText = "Записано";
             grid.Columns["BookedCount"].FillWeight = 55;
             grid.Columns["MaxParticipants"].HeaderText = "Мест";
@@ -226,12 +235,37 @@ namespace kyrsovaya.Forms
             LoadData();
         }
 
+        private void btnAssignGuide_Click(object sender, EventArgs e)
+        {
+            int? id = SelectedId();
+            if (id == null)
+            {
+                Ui.Info("Выберите экскурсию в таблице.");
+                return;
+            }
+
+            string title = (string)grid.CurrentRow.Cells["Title"].Value;
+            int guideId = (int)grid.CurrentRow.Cells["GuideId"].Value;
+
+            using (var form = new AssignGuideForm(id.Value, title, guideId))
+            {
+                if (form.ShowDialog(this) == DialogResult.OK) LoadData();
+            }
+        }
+
         private void btnParticipants_Click(object sender, EventArgs e)
         {
             int? id = SelectedId();
             if (id == null)
             {
                 Ui.Info("Выберите экскурсию в таблице.");
+                return;
+            }
+
+            int guideId = (int)grid.CurrentRow.Cells["GuideId"].Value;
+            if (!_canManage && guideId != Session.CurrentUser.Id)
+            {
+                Ui.Info("Вы можете смотреть участников только на тех экскурсиях, где назначены гидом.");
                 return;
             }
 

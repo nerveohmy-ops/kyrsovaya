@@ -8,6 +8,7 @@ namespace kyrsovaya.Models
         public const int Admin = 1;
         public const int Scientist = 2;
         public const int Visitor = 3;
+        public const int Guide = 4;
     }
 
     /// <summary>
@@ -33,6 +34,11 @@ namespace kyrsovaya.Models
         public bool IsAdmin
         {
             get { return RoleId == RoleIds.Admin; }
+        }
+
+        public bool IsGuide
+        {
+            get { return RoleId == RoleIds.Guide; }
         }
 
         /// <summary>Может ли пользователь добавлять и менять данные о видах и наблюдениях.</summary>

@@ -113,8 +113,13 @@ namespace kyrsovaya.Data
                 "FROM Users u JOIN Roles r ON r.Id = u.RoleId ORDER BY u.LastName, u.FirstName");
         }
 
-        public DataTable GetRoles()
+        public DataTable GetRoles(bool onlyGuideAndVisitor = false)
         {
+            if (onlyGuideAndVisitor)
+            {
+                return Db.Query(
+                    "SELECT Id, Name FROM Roles WHERE Id IN (4, 3) ORDER BY Id DESC");
+            }
             return Db.Query("SELECT Id, Name FROM Roles ORDER BY Id");
         }
 

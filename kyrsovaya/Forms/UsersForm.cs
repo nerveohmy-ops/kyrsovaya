@@ -8,20 +8,28 @@ using kyrsovaya.Services;
 namespace kyrsovaya.Forms
 {
     /// <summary>
-    /// Управление пользователями (только для администратора): смена роли и удаление.
+    /// Управление пользователями: администратор меняет любые роли и удаляет записи,
+    /// научный сотрудник назначает пользователям роль «Гид».
     /// </summary>
     public partial class UsersForm : Form
     {
         private readonly UserRepository _repo = new UserRepository();
+        private readonly bool _isAdmin = Session.CurrentUser.IsAdmin;
 
         public UsersForm()
         {
             InitializeComponent();
             Ui.Apply(this);
 
+            if (!_isAdmin)
+            {
+                Text = "Назначение гидов";
+                btnDelete.Visible = false;
+            }
+
             cmbRole.DisplayMember = "Name";
             cmbRole.ValueMember = "Id";
-            cmbRole.DataSource = _repo.GetRoles();
+            cmbRole.DataSource = _repo.GetRoles(!_isAdmin);
 
             LoadData();
         }
@@ -51,7 +59,13 @@ namespace kyrsovaya.Forms
         private void grid_SelectionChanged(object sender, EventArgs e)
         {
             if (grid.CurrentRow == null) return;
-            cmbRole.SelectedValue = (int)grid.CurrentRow.Cells["RoleId"].Value;
+            int roleId = (int)grid.CurrentRow.Cells["RoleId"].Value;
+            if (!_isAdmin && (roleId == RoleIds.Admin || roleId == RoleIds.Scientist))
+            {
+                cmbRole.SelectedIndex = -1;
+                return;
+            }
+            cmbRole.SelectedValue = roleId;
         }
 
         private void btnSetRole_Click(object sender, EventArgs e)
@@ -62,6 +76,19 @@ namespace kyrsovaya.Forms
             if (userId == Session.CurrentUser.Id)
             {
                 Ui.Error("Нельзя менять роль самому себе.");
+                return;
+            }
+
+            int currentRoleId = (int)grid.CurrentRow.Cells["RoleId"].Value;
+            if (!_isAdmin && (currentRoleId == RoleIds.Admin || currentRoleId == RoleIds.Scientist))
+            {
+                Ui.Error("Научный сотрудник не может менять роль администратора или другого научного сотрудника.");
+                return;
+            }
+
+            if (cmbRole.SelectedValue == null)
+            {
+                Ui.Info("Выберите роль из списка.");
                 return;
             }
 

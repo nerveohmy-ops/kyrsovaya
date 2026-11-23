@@ -17,7 +17,7 @@ namespace kyrsovaya.Data
         {
             return Db.Query(
                 "SELECT e.Id, e.Title, z.Name AS ZoneName, e.ExcursionDate, " +
-                "g.LastName + N' ' + g.FirstName AS GuideName, " +
+                "e.GuideId, g.LastName + N' ' + g.FirstName AS GuideName, " +
                 "(SELECT COUNT(*) FROM ExcursionBookings b WHERE b.ExcursionId = e.Id) AS BookedCount, " +
                 "e.MaxParticipants, e.IsOpen, " +
                 "CASE WHEN e.IsOpen = 1 THEN N'Открыта' ELSE N'Закрыта' END AS StatusText, " +
@@ -53,12 +53,22 @@ namespace kyrsovaya.Data
                 Db.Param("@id", excursionId));
         }
 
-        /// <summary>Сотрудники, которые могут вести экскурсии.</summary>
+        /// <summary>Гиды и научные сотрудники, которые могут вести экскурсии.</summary>
         public DataTable GetGuides()
         {
             return Db.Query(
-                "SELECT Id, LastName + N' ' + FirstName AS FullName " +
-                "FROM Users WHERE RoleId IN (1, 2) ORDER BY LastName, FirstName");
+                "SELECT u.Id, u.LastName + N' ' + u.FirstName + N' (' + r.Name + N')' AS FullName " +
+                "FROM Users u JOIN Roles r ON r.Id = u.RoleId " +
+                "WHERE u.RoleId IN (4, 2, 1) " +
+                "ORDER BY CASE WHEN u.RoleId = 4 THEN 0 ELSE 1 END, u.LastName, u.FirstName");
+        }
+
+        /// <summary>Назначает гида на выбранную экскурсию.</summary>
+        public void SetGuide(int id, int guideId)
+        {
+            Db.Execute("UPDATE Excursions SET GuideId = @guide WHERE Id = @id",
+                Db.Param("@guide", guideId),
+                Db.Param("@id", id));
         }
 
         public void Add(string title, int zoneId, int guideId, DateTime excursionDate,

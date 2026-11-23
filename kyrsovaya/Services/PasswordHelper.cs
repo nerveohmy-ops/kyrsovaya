@@ -10,7 +10,7 @@ namespace kyrsovaya.Services
     /// </summary>
     public static class PasswordHelper
     {
-        public const int MinLength = 12;
+        public const int MinLength = 6;
 
         /// <summary>SHA-256 пароля в виде hex-строки (64 символа).</summary>
         public static string Hash(string password)
@@ -28,8 +28,8 @@ namespace kyrsovaya.Services
         }
 
         /// <summary>
-        /// Возвращает текст ошибки или null, если пароль надёжный:
-        /// не меньше 12 символов, есть буквы, цифры и спецсимволы.
+        /// Возвращает текст ошибки или null, если пароль подходит:
+        /// не меньше 6 символов, есть буквы и цифры.
         /// </summary>
         public static string CheckStrength(string password)
         {
@@ -41,28 +41,24 @@ namespace kyrsovaya.Services
                 return "В пароле должна быть хотя бы одна буква";
             if (!password.Any(char.IsDigit))
                 return "В пароле должна быть хотя бы одна цифра";
-            if (!password.Any(c => !char.IsLetterOrDigit(c) && !char.IsWhiteSpace(c)))
-                return "В пароле должен быть хотя бы один спецсимвол (например ! # $ %)";
             return null;
         }
 
         /// <summary>Случайный пароль, который проходит CheckStrength.</summary>
         public static string Generate()
         {
-            const string letters = "abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ";
+            const string letters = "abcdefghijkmnpqrstuvwxyz";
             const string digits = "23456789";
-            const string symbols = "!#$%&*?";
 
-            var chars = new char[14];
+            var chars = new char[8];
             using (var rng = new RNGCryptoServiceProvider())
             {
-                // Первые три символа гарантируют наличие буквы, цифры и спецсимвола
+                // Первые два символа гарантируют наличие буквы и цифры
                 chars[0] = Pick(rng, letters);
                 chars[1] = Pick(rng, digits);
-                chars[2] = Pick(rng, symbols);
-                for (int i = 3; i < chars.Length; i++)
+                for (int i = 2; i < chars.Length; i++)
                 {
-                    chars[i] = Pick(rng, letters + digits + symbols);
+                    chars[i] = Pick(rng, letters + digits);
                 }
                 // Перемешиваем (Фишер — Йетс)
                 for (int i = chars.Length - 1; i > 0; i--)

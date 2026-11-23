@@ -73,7 +73,7 @@ namespace kyrsovaya.Forms
             this.labelGuide.AutoSize = true;
             this.labelGuide.Location = new System.Drawing.Point(20, 103);
             this.labelGuide.Name = "labelGuide";
-            this.labelGuide.Text = "Экскурсовод";
+            this.labelGuide.Text = "Гид";
             this.cmbGuide.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbGuide.Location = new System.Drawing.Point(170, 100);
             this.cmbGuide.Name = "cmbGuide";

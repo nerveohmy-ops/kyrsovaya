@@ -37,7 +37,11 @@ namespace kyrsovaya.Forms
         private void ApplyRolePermissions()
         {
             btnObservations.Visible = _user.CanEditData;
-            btnUsers.Visible = _user.IsAdmin;
+            btnUsers.Visible = _user.CanEditData;
+            if (!_user.IsAdmin)
+            {
+                btnUsers.Text = "Назначение гидов";
+            }
             // Зоны видны всем, но редактировать их может только администратор (проверяется в ZonesForm)
         }
 
