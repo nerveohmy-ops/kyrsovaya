@@ -19,6 +19,7 @@ namespace kyrsovaya.Forms
         {
             this.components = new System.ComponentModel.Container();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.panelCard = new System.Windows.Forms.Panel();
             this.labelTitle = new System.Windows.Forms.Label();
             this.labelSubtitle = new System.Windows.Forms.Label();
@@ -26,7 +27,7 @@ namespace kyrsovaya.Forms
             this.txtLogin = new System.Windows.Forms.TextBox();
             this.labelPassword = new System.Windows.Forms.Label();
             this.txtPassword = new System.Windows.Forms.TextBox();
-            this.chkShowPassword = new System.Windows.Forms.CheckBox();
+            this.btnEyePassword = new System.Windows.Forms.Button();
             this.btnLogin = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.linkRegister = new System.Windows.Forms.LinkLabel();
@@ -48,7 +49,7 @@ namespace kyrsovaya.Forms
             this.panelCard.Controls.Add(this.txtLogin);
             this.panelCard.Controls.Add(this.labelPassword);
             this.panelCard.Controls.Add(this.txtPassword);
-            this.panelCard.Controls.Add(this.chkShowPassword);
+            this.panelCard.Controls.Add(this.btnEyePassword);
             this.panelCard.Controls.Add(this.btnLogin);
             this.panelCard.Controls.Add(this.btnExit);
             this.panelCard.Controls.Add(this.linkRegister);
@@ -100,35 +101,34 @@ namespace kyrsovaya.Forms
             //
             this.txtPassword.Location = new System.Drawing.Point(40, 204);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(320, 25);
+            this.txtPassword.Size = new System.Drawing.Size(264, 25);
             this.txtPassword.TabIndex = 1;
             this.txtPassword.UseSystemPasswordChar = true;
             this.txtPassword.TextChanged += new System.EventHandler(this.txtPassword_TextChanged);
             //
-            // chkShowPassword
+            // btnEyePassword
             //
-            this.chkShowPassword.AutoSize = true;
-            this.chkShowPassword.Location = new System.Drawing.Point(40, 238);
-            this.chkShowPassword.Name = "chkShowPassword";
-            this.chkShowPassword.TabIndex = 2;
-            this.chkShowPassword.Text = "Показать пароль";
-            this.chkShowPassword.CheckedChanged += new System.EventHandler(this.chkShowPassword_CheckedChanged);
+            this.btnEyePassword.Location = new System.Drawing.Point(326, 204);
+            this.btnEyePassword.Name = "btnEyePassword";
+            this.btnEyePassword.Size = new System.Drawing.Size(34, 25);
+            this.btnEyePassword.TabStop = false;
+            this.btnEyePassword.Tag = "eye";
             //
             // btnLogin
             //
-            this.btnLogin.Location = new System.Drawing.Point(40, 280);
+            this.btnLogin.Location = new System.Drawing.Point(40, 260);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(320, 40);
-            this.btnLogin.TabIndex = 3;
+            this.btnLogin.TabIndex = 2;
             this.btnLogin.Text = "Войти";
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             //
             // linkRegister
             //
             this.linkRegister.AutoSize = true;
-            this.linkRegister.Location = new System.Drawing.Point(40, 336);
+            this.linkRegister.Location = new System.Drawing.Point(40, 318);
             this.linkRegister.Name = "linkRegister";
-            this.linkRegister.TabIndex = 4;
+            this.linkRegister.TabIndex = 3;
             this.linkRegister.TabStop = true;
             this.linkRegister.Text = "Нет аккаунта? Зарегистрироваться";
             this.linkRegister.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkRegister_LinkClicked);
@@ -136,19 +136,19 @@ namespace kyrsovaya.Forms
             // linkForgot
             //
             this.linkForgot.AutoSize = true;
-            this.linkForgot.Location = new System.Drawing.Point(40, 364);
+            this.linkForgot.Location = new System.Drawing.Point(40, 346);
             this.linkForgot.Name = "linkForgot";
-            this.linkForgot.TabIndex = 5;
+            this.linkForgot.TabIndex = 4;
             this.linkForgot.TabStop = true;
             this.linkForgot.Text = "Забыли пароль?";
             this.linkForgot.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkForgot_LinkClicked);
             //
             // btnExit
             //
-            this.btnExit.Location = new System.Drawing.Point(40, 392);
+            this.btnExit.Location = new System.Drawing.Point(40, 382);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(320, 32);
-            this.btnExit.TabIndex = 6;
+            this.btnExit.TabIndex = 5;
             this.btnExit.Tag = "danger";
             this.btnExit.Text = "Выход";
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
@@ -172,6 +172,7 @@ namespace kyrsovaya.Forms
         #endregion
 
         private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.Panel panelCard;
         private System.Windows.Forms.Label labelTitle;
         private System.Windows.Forms.Label labelSubtitle;
@@ -179,7 +180,7 @@ namespace kyrsovaya.Forms
         private System.Windows.Forms.TextBox txtLogin;
         private System.Windows.Forms.Label labelPassword;
         private System.Windows.Forms.TextBox txtPassword;
-        private System.Windows.Forms.CheckBox chkShowPassword;
+        private System.Windows.Forms.Button btnEyePassword;
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.LinkLabel linkRegister;

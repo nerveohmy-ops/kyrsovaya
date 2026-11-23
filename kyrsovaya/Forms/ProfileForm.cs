@@ -18,6 +18,9 @@ namespace kyrsovaya.Forms
         {
             InitializeComponent();
             Ui.Apply(this);
+            Ui.SetupPasswordEye(btnEyeOld, txtOldPassword, toolTip);
+            Ui.SetupPasswordEye(btnEyeNew, txtNewPassword, toolTip);
+            Ui.SetupPasswordEye(btnEyeRepeat, txtRepeat, toolTip);
             FillFields();
         }
 
@@ -81,14 +84,6 @@ namespace kyrsovaya.Forms
             txtNewPassword.Clear();
             txtRepeat.Clear();
             Ui.Info("Пароль изменён.");
-        }
-
-        private void chkShowPassword_CheckedChanged(object sender, EventArgs e)
-        {
-            bool hide = !chkShowPassword.Checked;
-            txtOldPassword.UseSystemPasswordChar = hide;
-            txtNewPassword.UseSystemPasswordChar = hide;
-            txtRepeat.UseSystemPasswordChar = hide;
         }
 
         private void Field_TextChanged(object sender, EventArgs e)

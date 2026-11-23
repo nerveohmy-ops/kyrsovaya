@@ -17,6 +17,7 @@ namespace kyrsovaya.Forms
         {
             InitializeComponent();
             Ui.Apply(this);
+            Ui.SetupPasswordEye(btnEyePassword, txtPassword, toolTip);
             panelCard.BackColor = System.Drawing.Color.White;
             labelTitle.ForeColor = Ui.DarkGreen;
             LoadBackground();
@@ -89,11 +90,6 @@ namespace kyrsovaya.Forms
             {
                 form.ShowDialog(this);
             }
-        }
-
-        private void chkShowPassword_CheckedChanged(object sender, EventArgs e)
-        {
-            txtPassword.UseSystemPasswordChar = !chkShowPassword.Checked;
         }
 
         private void txtLogin_TextChanged(object sender, EventArgs e)

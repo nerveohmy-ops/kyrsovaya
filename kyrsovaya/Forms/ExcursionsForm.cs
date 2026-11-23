@@ -28,11 +28,11 @@ namespace kyrsovaya.Forms
 
         private void SetupPermissions()
         {
-            // Клиентские кнопки (посетитель)
-            btnBook.Visible = !_canManage;
-            btnCancelBooking.Visible = !_canManage;
+            // Присоединиться к экскурсии может любой авторизованный пользователь
+            btnBook.Visible = true;
+            btnCancelBooking.Visible = true;
 
-            // Кнопки научного сотрудника / администратора
+            // Кнопки управления для научного сотрудника / администратора
             btnAdd.Visible = _canManage;
             btnEdit.Visible = _canManage;
             btnOpen.Visible = _canManage;
@@ -40,6 +40,8 @@ namespace kyrsovaya.Forms
             btnParticipants.Visible = _canManage;
             btnDelete.Visible = _canManage;
             btnExport.Visible = _canManage;
+
+            panelBottom.Height = _canManage ? 104 : 60;
         }
 
         private void LoadFilters()
@@ -47,10 +49,7 @@ namespace kyrsovaya.Forms
             cmbFilter.Items.Add("Все");
             cmbFilter.Items.Add("Открытые");
             cmbFilter.Items.Add("Закрытые");
-            if (!_canManage)
-            {
-                cmbFilter.Items.Add("Мои записи");
-            }
+            cmbFilter.Items.Add("Мои записи");
             cmbFilter.SelectedIndex = 0;
             _filtersReady = true;
         }
@@ -83,7 +82,6 @@ namespace kyrsovaya.Forms
             grid.Columns["StatusText"].FillWeight = 65;
 
             grid.Columns["MyBooking"].HeaderText = "Моя запись";
-            grid.Columns["MyBooking"].Visible = !_canManage;
             grid.Columns["MyBooking"].FillWeight = 80;
 
             grid.Columns["Description"].HeaderText = "Описание";
@@ -130,7 +128,7 @@ namespace kyrsovaya.Forms
             }
 
             string title = (string)grid.CurrentRow.Cells["Title"].Value;
-            if (!Ui.Confirm("Записаться на экскурсию «" + title + "»?")) return;
+            if (!Ui.Confirm("Присоединиться к экскурсии «" + title + "»?")) return;
 
             string error = _repo.Book(id.Value, Session.CurrentUser.Id);
             if (error != null)
@@ -140,7 +138,7 @@ namespace kyrsovaya.Forms
             }
 
             LoadData();
-            Ui.Info("Вы успешно записаны на экскурсию!");
+            Ui.Info("Вы успешно присоединились к экскурсии!");
         }
 
         private void btnCancelBooking_Click(object sender, EventArgs e)

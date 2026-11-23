@@ -20,6 +20,8 @@ namespace kyrsovaya.Forms
         {
             InitializeComponent();
             Ui.Apply(this);
+            Ui.SetupPasswordEye(btnEyePassword, txtPassword, toolTip);
+            Ui.SetupPasswordEye(btnEyeRepeat, txtRepeat, toolTip);
             SetupHints();
         }
 
@@ -89,12 +91,6 @@ namespace kyrsovaya.Forms
                 Ui.Error("Исправьте ошибки в форме. Наведите курсор на красный значок рядом с полем, чтобы увидеть подсказку.");
             }
             return !hasError;
-        }
-
-        private void chkShowPassword_CheckedChanged(object sender, EventArgs e)
-        {
-            txtPassword.UseSystemPasswordChar = !chkShowPassword.Checked;
-            txtRepeat.UseSystemPasswordChar = !chkShowPassword.Checked;
         }
 
         // Как только пользователь начинает исправлять поле, ошибка рядом с ним пропадает

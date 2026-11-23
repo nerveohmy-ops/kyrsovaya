@@ -33,9 +33,10 @@
             this.mtbPhone = new System.Windows.Forms.MaskedTextBox();
             this.labelPassword = new System.Windows.Forms.Label();
             this.txtPassword = new System.Windows.Forms.TextBox();
+            this.btnEyePassword = new System.Windows.Forms.Button();
             this.labelRepeat = new System.Windows.Forms.Label();
             this.txtRepeat = new System.Windows.Forms.TextBox();
-            this.chkShowPassword = new System.Windows.Forms.CheckBox();
+            this.btnEyeRepeat = new System.Windows.Forms.Button();
             this.btnRegister = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
@@ -124,10 +125,15 @@
             this.labelPassword.Text = "Пароль";
             this.txtPassword.Location = new System.Drawing.Point(180, 257);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(240, 25);
+            this.txtPassword.Size = new System.Drawing.Size(206, 25);
             this.txtPassword.TabIndex = 5;
             this.txtPassword.UseSystemPasswordChar = true;
             this.txtPassword.TextChanged += new System.EventHandler(this.Field_TextChanged);
+            this.btnEyePassword.Location = new System.Drawing.Point(408, 257);
+            this.btnEyePassword.Name = "btnEyePassword";
+            this.btnEyePassword.Size = new System.Drawing.Size(34, 25);
+            this.btnEyePassword.TabStop = false;
+            this.btnEyePassword.Tag = "eye";
             //
             // labelRepeat / txtRepeat
             //
@@ -137,35 +143,31 @@
             this.labelRepeat.Text = "Повторите пароль";
             this.txtRepeat.Location = new System.Drawing.Point(180, 297);
             this.txtRepeat.Name = "txtRepeat";
-            this.txtRepeat.Size = new System.Drawing.Size(240, 25);
+            this.txtRepeat.Size = new System.Drawing.Size(206, 25);
             this.txtRepeat.TabIndex = 6;
             this.txtRepeat.UseSystemPasswordChar = true;
             this.txtRepeat.TextChanged += new System.EventHandler(this.Field_TextChanged);
-            //
-            // chkShowPassword
-            //
-            this.chkShowPassword.AutoSize = true;
-            this.chkShowPassword.Location = new System.Drawing.Point(180, 332);
-            this.chkShowPassword.Name = "chkShowPassword";
-            this.chkShowPassword.TabIndex = 7;
-            this.chkShowPassword.Text = "Показать пароль";
-            this.chkShowPassword.CheckedChanged += new System.EventHandler(this.chkShowPassword_CheckedChanged);
+            this.btnEyeRepeat.Location = new System.Drawing.Point(408, 297);
+            this.btnEyeRepeat.Name = "btnEyeRepeat";
+            this.btnEyeRepeat.Size = new System.Drawing.Size(34, 25);
+            this.btnEyeRepeat.TabStop = false;
+            this.btnEyeRepeat.Tag = "eye";
             //
             // btnRegister
             //
-            this.btnRegister.Location = new System.Drawing.Point(180, 375);
+            this.btnRegister.Location = new System.Drawing.Point(180, 348);
             this.btnRegister.Name = "btnRegister";
-            this.btnRegister.Size = new System.Drawing.Size(240, 38);
-            this.btnRegister.TabIndex = 8;
+            this.btnRegister.Size = new System.Drawing.Size(262, 38);
+            this.btnRegister.TabIndex = 7;
             this.btnRegister.Text = "Зарегистрироваться";
             this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
             //
             // btnBack
             //
-            this.btnBack.Location = new System.Drawing.Point(25, 375);
+            this.btnBack.Location = new System.Drawing.Point(25, 348);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(130, 38);
-            this.btnBack.TabIndex = 9;
+            this.btnBack.TabIndex = 8;
             this.btnBack.Text = "Назад";
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             //
@@ -173,7 +175,7 @@
             //
             this.AcceptButton = this.btnRegister;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(460, 435);
+            this.ClientSize = new System.Drawing.Size(480, 410);
             this.Controls.Add(this.labelTitle);
             this.Controls.Add(this.labelLastName);
             this.Controls.Add(this.txtLastName);
@@ -187,9 +189,10 @@
             this.Controls.Add(this.mtbPhone);
             this.Controls.Add(this.labelPassword);
             this.Controls.Add(this.txtPassword);
+            this.Controls.Add(this.btnEyePassword);
             this.Controls.Add(this.labelRepeat);
             this.Controls.Add(this.txtRepeat);
-            this.Controls.Add(this.chkShowPassword);
+            this.Controls.Add(this.btnEyeRepeat);
             this.Controls.Add(this.btnRegister);
             this.Controls.Add(this.btnBack);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -219,9 +222,10 @@
         private System.Windows.Forms.MaskedTextBox mtbPhone;
         private System.Windows.Forms.Label labelPassword;
         private System.Windows.Forms.TextBox txtPassword;
+        private System.Windows.Forms.Button btnEyePassword;
         private System.Windows.Forms.Label labelRepeat;
         private System.Windows.Forms.TextBox txtRepeat;
-        private System.Windows.Forms.CheckBox chkShowPassword;
+        private System.Windows.Forms.Button btnEyeRepeat;
         private System.Windows.Forms.Button btnRegister;
         private System.Windows.Forms.Button btnBack;
     }

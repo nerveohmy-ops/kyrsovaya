@@ -105,16 +105,16 @@ namespace kyrsovaya.Forms
             this.panelBottom.Controls.Add(this.btnBack);
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelBottom.Name = "panelBottom";
-            this.panelBottom.Size = new System.Drawing.Size(1100, 60);
+            this.panelBottom.Size = new System.Drawing.Size(1100, 104);
             //
-            // Кнопки для клиента
+            // Кнопки для всех авторизованных пользователей
             //
             this.btnBook.Location = new System.Drawing.Point(15, 12);
             this.btnBook.Name = "btnBook";
-            this.btnBook.Size = new System.Drawing.Size(140, 36);
-            this.btnBook.Text = "Записаться";
+            this.btnBook.Size = new System.Drawing.Size(150, 36);
+            this.btnBook.Text = "Присоединиться";
             this.btnBook.Click += new System.EventHandler(this.btnBook_Click);
-            this.btnCancelBooking.Location = new System.Drawing.Point(165, 12);
+            this.btnCancelBooking.Location = new System.Drawing.Point(175, 12);
             this.btnCancelBooking.Name = "btnCancelBooking";
             this.btnCancelBooking.Size = new System.Drawing.Size(160, 36);
             this.btnCancelBooking.Tag = "danger";
@@ -123,39 +123,39 @@ namespace kyrsovaya.Forms
             //
             // Кнопки для научного сотрудника
             //
-            this.btnAdd.Location = new System.Drawing.Point(15, 12);
+            this.btnAdd.Location = new System.Drawing.Point(15, 56);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(105, 36);
             this.btnAdd.Text = "Добавить";
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            this.btnEdit.Location = new System.Drawing.Point(128, 12);
+            this.btnEdit.Location = new System.Drawing.Point(128, 56);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(105, 36);
             this.btnEdit.Text = "Изменить";
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
-            this.btnOpen.Location = new System.Drawing.Point(241, 12);
+            this.btnOpen.Location = new System.Drawing.Point(241, 56);
             this.btnOpen.Name = "btnOpen";
             this.btnOpen.Size = new System.Drawing.Size(100, 36);
             this.btnOpen.Text = "Открыть";
             this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
-            this.btnClose.Location = new System.Drawing.Point(349, 12);
+            this.btnClose.Location = new System.Drawing.Point(349, 56);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(100, 36);
             this.btnClose.Tag = "danger";
             this.btnClose.Text = "Закрыть";
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            this.btnParticipants.Location = new System.Drawing.Point(457, 12);
+            this.btnParticipants.Location = new System.Drawing.Point(457, 56);
             this.btnParticipants.Name = "btnParticipants";
             this.btnParticipants.Size = new System.Drawing.Size(115, 36);
             this.btnParticipants.Text = "Участники";
             this.btnParticipants.Click += new System.EventHandler(this.btnParticipants_Click);
-            this.btnDelete.Location = new System.Drawing.Point(580, 12);
+            this.btnDelete.Location = new System.Drawing.Point(580, 56);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(100, 36);
             this.btnDelete.Tag = "danger";
             this.btnDelete.Text = "Удалить";
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            this.btnExport.Location = new System.Drawing.Point(688, 12);
+            this.btnExport.Location = new System.Drawing.Point(688, 56);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(125, 36);
             this.btnExport.Text = "Экспорт в CSV";
